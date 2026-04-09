@@ -35,11 +35,17 @@ const revealObserver = new IntersectionObserver((entries) => {
 // Observa cada elemento
 revealElements.forEach((el) => revealObserver.observe(el));
 
-// Seleciona todos os links com a classe "proj-link"
-  const projectLinks = document.querySelectorAll('.proj-link');
+    // Função para adicionar target e rel a links de qualquer container
+function setLinksToNewTab(containerSelector) {
+    const links = document.querySelectorAll(`${containerSelector} a`);
+    links.forEach(link => {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+  }
 
-  // Adiciona target="_blank" e rel="noopener noreferrer" automaticamente
-  projectLinks.forEach(link => {
-    link.setAttribute('target', '_blank');
-    link.setAttribute('rel', 'noopener noreferrer');
-  });
+  // Aplica aos links de projetos
+  setLinksToNewTab('.proj-links');
+
+  // Aplica aos links de redes sociais
+  setLinksToNewTab('.social-links');
